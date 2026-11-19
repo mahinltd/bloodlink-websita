@@ -1,0 +1,28 @@
+# BloodLink
+
+> BloodLink is a voluntary, non-profit blood donation platform for Bangladesh.
+> It connects blood donors with patients through smart matching, SOS alerts,
+> real-time chat, and a verified donor network. Blood buying/selling is
+> strictly prohibited — all donations are 100% voluntary and free.
+
+## Website
+- Homepage: https://bloodlink.tech
+- Hospital Directory: https://bloodlink.tech/hospitals
+- Blood Bank Directory: https://bloodlink.tech/blood-banks
+- About: https://bloodlink.tech/about
+- FAQ: https://bloodlink.tech/faq
+- Download Android App: https://bloodlink.tech/download
+
+## Public API
+- Base: https://api.bloodlink.tech/api/v1
+- Public stats: /config/stats
+- Hospitals: /hospitals
+- Blood banks: /blood-banks
+
+## Key Facts
+- Country: Bangladesh
+- Cost: Free forever, non-profit
+- Donation cooldown: 90 days between donations
+- Donor eligibility: age 18-65
+- Blood groups supported: A+, A-, B+, B-, AB+, AB-, O+, O-
+- Contact: support@bloodlink.tech
