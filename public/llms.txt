@@ -23,6 +23,6 @@
 - Country: Bangladesh
 - Cost: Free forever, non-profit
 - Donation cooldown: 90 days between donations
-- Donor eligibility: age 18-65
+- Donor eligibility: age 18-64
 - Blood groups supported: A+, A-, B+, B-, AB+, AB-, O+, O-
 - Contact: support@bloodlink.tech

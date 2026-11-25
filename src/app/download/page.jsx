@@ -41,7 +41,13 @@ export default async function DownloadPage() {
 
             <div className="mt-8">
               {version?.apkUrl ? (
-                <a href={version.apkUrl} className="btn-primary !px-8 !py-4 text-base">
+                <a
+                  href={version.apkUrl}
+                  download
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-primary !px-8 !py-4 text-base"
+                >
                   ⬇ Download APK
                   {version.latestVersion ? ` (v${version.latestVersion})` : ''}
                 </a>

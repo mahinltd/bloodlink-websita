@@ -1,6 +1,8 @@
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
+const API_URL = (process.env.NEXT_PUBLIC_API_URL || '').replace(/\/$/, '');
 
 async function safeGet(path, revalidate = 300) {
+  if (!API_URL) return null;
+
   try {
     const res = await fetch(`${API_URL}${path}`, { next: { revalidate } });
     if (!res.ok) return null;
@@ -41,12 +43,12 @@ export async function getBloodBanks(params = {}) {
   const data = await safeGet(`/blood-banks?${qs}`, 60);
   return {
     items: data?.bloodBanks ?? [],
-    pagination: data?.pagination ?? { page: 1, limit: 12, total: 0, totalPages: 1 },
+    pagination: data?.pagination ?? { page: 1, limit: 20, total: 0, totalPages: 1 },
   };
 }
 
 export async function getAppVersion() {
-  return await safeGet('/app-version', 300);
+  return await safeGet('/app-version', 60);
 }
 
 export async function getAppConfig() {

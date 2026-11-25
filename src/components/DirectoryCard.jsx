@@ -2,9 +2,7 @@ import BloodGroupBadge from './BloodGroupBadge';
 
 export default function DirectoryCard({ item, type }) {
   const icon = type === 'hospital' ? '🏥' : '🩸';
-  const location = [item.upazila, item.district, item.division]
-    .filter(Boolean)
-    .join(', ');
+  const location = [item.district, item.division].filter(Boolean).join(', ');
 
   return (
     <div className="card p-6">
@@ -25,12 +23,12 @@ export default function DirectoryCard({ item, type }) {
         <p className="mt-1 text-xs font-medium text-ink/40">📍 {location}</p>
       )}
 
-      {item.phone && (
+      {item.contactNumber && (
         <a
-          href={`tel:${item.phone}`}
+          href={`tel:${item.contactNumber}`}
           className="mt-4 inline-flex items-center gap-2 rounded-full bg-cream px-4 py-2 text-sm font-semibold text-primary transition hover:bg-primary hover:text-white"
         >
-          📞 {item.phone}
+          📞 {item.contactNumber}
         </a>
       )}
 
