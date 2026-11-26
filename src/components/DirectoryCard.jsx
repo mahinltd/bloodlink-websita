@@ -1,8 +1,19 @@
 import BloodGroupBadge from './BloodGroupBadge';
+import {
+  formatContactNumber,
+  normalizeAvailableGroups,
+  toDisplayText,
+} from '@/lib/format';
 
 export default function DirectoryCard({ item, type }) {
+  const name = toDisplayText(item?.name);
+  const address = toDisplayText(item?.address);
+  const district = toDisplayText(item?.district);
+  const division = toDisplayText(item?.division);
+  const location = [district, division].filter(Boolean).join(', ');
+  const contactNumber = formatContactNumber(item?.contactNumber);
+  const availableGroups = normalizeAvailableGroups(item?.availableGroups);
   const icon = type === 'hospital' ? '🏥' : '🩸';
-  const location = [item.district, item.division].filter(Boolean).join(', ');
 
   return (
     <div className="card p-6">
@@ -17,28 +28,28 @@ export default function DirectoryCard({ item, type }) {
         )}
       </div>
 
-      <h3 className="font-display mt-4 text-lg font-bold text-ink">{item.name}</h3>
-      {item.address && <p className="mt-1 text-sm text-ink/60">{item.address}</p>}
+      <h3 className="font-display mt-4 text-lg font-bold text-ink">{name}</h3>
+      {address && <p className="mt-1 text-sm text-ink/60">{address}</p>}
       {location && (
         <p className="mt-1 text-xs font-medium text-ink/40">📍 {location}</p>
       )}
 
-      {item.contactNumber && (
+      {contactNumber && (
         <a
-          href={`tel:${item.contactNumber}`}
+          href={`tel:${contactNumber}`}
           className="mt-4 inline-flex items-center gap-2 rounded-full bg-cream px-4 py-2 text-sm font-semibold text-primary transition hover:bg-primary hover:text-white"
         >
-          📞 {item.contactNumber}
+          📞 {contactNumber}
         </a>
       )}
 
-      {type === 'bloodBank' && item.availableGroups?.length > 0 && (
+      {type === 'bloodBank' && availableGroups.length > 0 && (
         <div className="mt-4 border-t border-ink/5 pt-4">
           <p className="text-[11px] font-semibold uppercase tracking-wider text-ink/40">
             Available Groups
           </p>
           <div className="mt-2 flex flex-wrap gap-1.5">
-            {item.availableGroups.map((g) => (
+            {availableGroups.map((g) => (
               <BloodGroupBadge key={g} group={g} size="sm" />
             ))}
           </div>

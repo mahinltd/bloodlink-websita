@@ -1,4 +1,17 @@
+import { normalizeAvailableGroups } from './format';
+
 const API_URL = (process.env.NEXT_PUBLIC_API_URL || '').replace(/\/$/, '');
+
+function normalizeDirectoryItems(value) {
+  if (!Array.isArray(value)) return [];
+
+  return value
+    .filter((item) => item && typeof item === 'object' && !Array.isArray(item))
+    .map((item) => ({
+      ...item,
+      availableGroups: normalizeAvailableGroups(item.availableGroups),
+    }));
+}
 
 async function safeGet(path, revalidate = 300) {
   if (!API_URL) return null;
@@ -31,7 +44,7 @@ export async function getHospitals(params = {}) {
   ).toString();
   const data = await safeGet(`/hospitals?${qs}`, 60);
   return {
-    items: data?.hospitals ?? [],
+    items: normalizeDirectoryItems(data?.hospitals),
     pagination: data?.pagination ?? { page: 1, limit: 12, total: 0, totalPages: 1 },
   };
 }
@@ -42,7 +55,7 @@ export async function getBloodBanks(params = {}) {
   ).toString();
   const data = await safeGet(`/blood-banks?${qs}`, 60);
   return {
-    items: data?.bloodBanks ?? [],
+    items: normalizeDirectoryItems(data?.bloodBanks),
     pagination: data?.pagination ?? { page: 1, limit: 20, total: 0, totalPages: 1 },
   };
 }
